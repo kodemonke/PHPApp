@@ -5,19 +5,15 @@ $mktoLead = $_GET[leadID];
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://483-KCW-712.mktorest.com/identity/oauth/token",
+  CURLOPT_URL => "https://483-KCW-712.mktorest.com/identity/oauth/token?grant_type=client_credentials&client_id=5188c509-b6b4-4f86-9c50-17316fc6de72&client_secret=oRG5cQGtU14HQ7leFZxwJCMWZck9PP2r",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
-	'grant_type' => 'client_credentials',
-	'client_id' => '5188c509-b6b4-4f86-9c50-17316fc6de72',
-	'client_secret' => 'oRG5cQGtU14HQ7leFZxwJCMWZck9PP2r'
+  CURLOPT_CUSTOMREQUEST => "GET"
   ),
-),'grant_type=client_credentials&client_id=5188c509-b6b4-4f86-9c50-17316fc6de72&client_secret=oRG5cQGtU14HQ7leFZxwJCMWZck9PP2r');
+));
 
 $response = curl_exec($curl);
 $err = curl_error($curl);
