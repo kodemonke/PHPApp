@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: http://localhost:8000');
+header('Access-Control-Allow-Origin: https://secure.watchguard.com');
 $mktoLead = $_GET[leadID];
 
 $curl = curl_init();
