@@ -22,12 +22,10 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $err = curl_error($curl);
 
-
-curl_close($curl);
-
   $data = json_decode($response);
   $token = $data->access_token;
 
+curl_close($curl);
   
 if ($err) {
   echo "cURL Error #1: " . $err;
@@ -57,7 +55,7 @@ if ($err) {
     if ($err2) {
       echo "cURL Error #2:" . $err2;
     } else {
-      echo $token . "<br />Final Response" . $response2;
+      echo "First Response:" . $response . "<br />Final Response" . $response2;
     }
 
 
