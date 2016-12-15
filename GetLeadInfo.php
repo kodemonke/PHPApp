@@ -13,7 +13,7 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => array(
-    "cache-control: no-cache",
+    "cache-control: no-cache"
   ),
 ));
 
@@ -23,16 +23,17 @@ $err = curl_error($curl);
   $data = json_decode($response);
   $token = $data->access_token;
 
+  
 curl_close($curl);
   
 if ($err) {
   echo "cURL Error #1: " . $err;
     } else {
-
+	echo $token . "<br />";
     $curl2 = curl_init();
 
     curl_setopt_array($curl2, array(
-      CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/lead/"'.$mktoLead.'".json',
+      CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/lead/"'.$mktoLead.'".json?fields=lastName%2CfirstName%2Cemail%2Ccompany%2Ctitle&access_token="'.$token,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
@@ -40,8 +41,7 @@ if ($err) {
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "GET",
       CURLOPT_HTTPHEADER => array(
-        'fields' => 'lastName,firstName,email,company,title',
-        'access_token' => $token
+	  "cache-control: no-cache"
       ),
     ));
 
