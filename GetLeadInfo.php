@@ -17,7 +17,7 @@ curl_setopt_array($curl, array(
 	'client_id' => '5188c509-b6b4-4f86-9c50-17316fc6de72',
 	'client_secret' => 'oRG5cQGtU14HQ7leFZxwJCMWZck9PP2r'
   ),
-));
+),'grant_type=client_credentials&client_id=5188c509-b6b4-4f86-9c50-17316fc6de72&client_secret=oRG5cQGtU14HQ7leFZxwJCMWZck9PP2r');
 
 $response = curl_exec($curl);
 $err = curl_error($curl);
