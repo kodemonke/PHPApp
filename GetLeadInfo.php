@@ -24,7 +24,6 @@ $err = curl_error($curl);
 
   $data = json_decode($response);
   $token = $data->access_token;
-  echo $token.$data;
 curl_close($curl);
 
 if ($err) {
@@ -55,8 +54,7 @@ if ($err) {
     if ($err2) {
       echo "cURL Error #2:" . $err2;
     } else {
-	  echo 'https://483-kcw-712.mktorest.com/rest/v1/lead/"'.$mktoLead.'".json';
-      echo $response2;
+      echo "Final Response" . $response2;
     }
 
 
