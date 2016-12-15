@@ -29,11 +29,10 @@ curl_close($curl);
 if ($err) {
   echo "cURL Error #1: " . $err;
     } else {
-	echo $token . "<br />";
     $curl2 = curl_init();
 
     curl_setopt_array($curl2, array(
-      CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/lead/"'.$mktoLead.'".json?fields=lastName%2CfirstName%2Cemail%2Ccompany%2Ctitle&access_token="'.$token,
+      CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/lead/'.$mktoLead.'.json?fields=lastName,firstName,email,company,title&access_token='.$token,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
@@ -53,7 +52,7 @@ if ($err) {
     if ($err2) {
       echo "cURL Error #2:" . $err2;
     } else {
-      echo "First Response:" . $response . "<br />Final Response" . $response2;
+      echo $response2;
     }
 
 
