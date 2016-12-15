@@ -22,10 +22,13 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $err = curl_error($curl);
 
-  $data = json_decode($response);
-  $token = $data->access_token;
+
 curl_close($curl);
 
+  $data = json_decode($response);
+  $token = $data->access_token;
+
+  echo $token;
 if ($err) {
   echo "cURL Error #1: " . $err;
     } else {
