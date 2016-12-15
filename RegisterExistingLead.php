@@ -9,8 +9,6 @@ $identify->setMethod(HTTP_METH_GET);
 
 $identify->setQueryData(array(
 	'grant_type' => 'client_credentials',
-	'client_id' => '5188c509-b6b4-4f86-9c50-17316fc6de72',
-	'client_secret' => 'oRG5cQGtU14HQ7leFZxwJCMWZck9PP2r'
 	)
 
 try {
@@ -23,7 +21,6 @@ try {
 	$request->setMethod(HTTP_METH_POST);
 
 	$request->setQueryData(array(
-	  'access_token' => '05fe88a3-c9af-44ac-8ac1-f0607af7ac1e:sj'
 	));
 
 	$request->setHeaders(array(
