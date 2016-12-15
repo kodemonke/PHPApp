@@ -28,7 +28,7 @@ curl_close($curl);
   $data = json_decode($response);
   $token = $data->access_token;
 
-  echo $token;
+  
 if ($err) {
   echo "cURL Error #1: " . $err;
     } else {
@@ -57,7 +57,7 @@ if ($err) {
     if ($err2) {
       echo "cURL Error #2:" . $err2;
     } else {
-      echo "Final Response" . $response2;
+      echo $token . "<br />Final Response" . $response2;
     }
 
 
