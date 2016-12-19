@@ -41,7 +41,9 @@ if ($err) {
 		'status'=>'Registered'
 	);
 	
-	$field_string = http_build_query(json_encode($fields));
+	
+	
+	$field_string = json_encode($fields);
 	
     $curl2 = curl_init();
 
