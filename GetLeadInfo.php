@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: https://secure.watchguard.com');
 $mktoLead = $_GET[leadID];
 
-if (ctype_digit($mktoLead) && strlen($mktoLead) < 10)
+if (ctype_digit($mktoLead) && strlen($mktoLead) < 10){
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
@@ -28,7 +28,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10)
 	curl_close($curl);
 	  
 	if ($err) {
-	  echo "cURL Error #1: " . $err;
+	  echo "System Error";
 		} else {
 		$curl2 = curl_init();
 
@@ -51,11 +51,15 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10)
 		curl_close($curl2);
 
 		if ($err2) {
-		  echo "cURL Error #2:" . $err2;
+		  echo "Response Error";
 		} else {
 		  echo $response2;
 		}
 
 
 	  }
+}
+else{
+	echo "Invalid Input";
+}
 ?>
