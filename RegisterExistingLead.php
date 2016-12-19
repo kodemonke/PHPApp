@@ -31,6 +31,17 @@ if ($err) {
   echo "cURL Error #1: " . $err;
     } else {
 	
+	$fields = array(
+		'access_token': $token,
+		'input': array(
+			'id': $mktoLead
+			);
+		'lookupField':'id',
+		'status':'Registered'
+	);
+	
+	$field_string = http_build_query($fields);
+	
     $curl2 = curl_init();
 
 	 curl_setopt_array($curl2, array(
@@ -41,7 +52,7 @@ if ($err) {
 	  CURLOPT_TIMEOUT => 30,
 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	  CURLOPT_CUSTOMREQUEST => "POST",
-	  CURLOPT_POSTFIELDS => "{\"input\":[{\"id\": \"".$mktoLead."\"}],\"lookupField\": \"id\",\"status\": \"Registered\"}",
+	  CURLOPT_POSTFIELDS => $field_string,
 	  CURLOPT_HTTPHEADER => array(
 		"cache-control: no-cache"
 	  ),
