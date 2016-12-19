@@ -62,7 +62,9 @@ if ($err) {
 
     $response2 = curl_exec($curl2);
     $err2 = curl_error($curl2);
-
+	
+	echo $field_string;
+	
     curl_close($curl2);
 
     if ($err2) {
