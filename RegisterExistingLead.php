@@ -34,9 +34,9 @@ if ($err) {
 	
 	$fields = array(
 		'access_token' => $token,
-		'input'=> array(
+		'input'=> array(array(
 			'id' => $mktoLead
-			),
+			)),
 		'lookupField'=>'id',
 		'status'=>'Registered'
 	);
