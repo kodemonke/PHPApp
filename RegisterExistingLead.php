@@ -3,47 +3,64 @@ header('Access-Control-Allow-Origin: https://secure.watchguard.com');
 $mktoProgram = $_GET[programID];
 $mktoLead = $_GET[leadID];
 
-$identify = new HttpRequest();
-$identify->setURL('https://483-KCW-712.mktorest.com/identity/oauth/token');
-$identify->setMethod(HTTP_METH_GET);
+$curl = curl_init();
 
-$identify->setQueryData(array(
-	'grant_type' => 'client_credentials',
-	)
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://483-kcw-712.mktorest.com/identity/oauth/token?grant_type=client_credentials&client_id=4774cebe-0187-4a08-b19d-8a6c52862bf3&client_secret=yZ0qmfqTV89c0wHqdN2JFIiQb0f2wdBb",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache"
+  ),
+));
 
-try {
-  $identityResponse = $identify->send();
-  $data = json_decode($identityResponse);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+  $data = json_decode($response);
   $token = $data->access_token;
 
-	$request = new HttpRequest();
-	$request->setUrl('https://483-kcw-712.mktorest.com/rest/v1/leads/programs/"'.$mktoProgram.'"/status.json');
-	$request->setMethod(HTTP_METH_POST);
+  
+curl_close($curl);
+  
+if ($err) {
+  echo "cURL Error #1: " . $err;
+    } else {
+    $curl2 = curl_init();
 
-	$request->setQueryData(array(
+	 curl_setopt_array($curl2, array(
+      CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'/status.json?access_token='.$token,
+	  CURLOPT_RETURNTRANSFER => true,
+	  CURLOPT_ENCODING => "",
+	  CURLOPT_MAXREDIRS => 10,
+	  CURLOPT_TIMEOUT => 30,
+	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  CURLOPT_CUSTOMREQUEST => "POST",
+	  CURLOPT_POSTFIELDS => array(
+	  "input":[
+			{"id":$mktoLead}],
+		"lookupField": "id",
+		"status": "Registered"
+		),
+	  CURLOPT_HTTPHEADER => array(
+		"cache-control: no-cache"
+	  ),
 	));
 
-	$request->setHeaders(array(
-	  'cache-control' => 'no-cache',
-	  'content-type' => 'application/json'
-	));
+    $response2 = curl_exec($curl2);
+    $err2 = curl_error($curl2);
 
-	$request->setBody('{
-	  "input": [
-		{"id": $mktoLead}
-	  ],
-	  "lookupField": "id",
-	  "status": "Registered"
-	}');
+    curl_close($curl2);
 
-	try {
-	  $response = $request->send();
-
-	  echo $response->getBody();
-	} catch (HttpException $ex) {
-	  echo "Processing Error";
+    if ($err2) {
+      echo "cURL Error #2:" . $err2;
+    } else {
+      echo $response2;
+    }
 	}
-} catch (HttpException $ex) {
-  echo "Authentication Error";
-}
+
 ?>
