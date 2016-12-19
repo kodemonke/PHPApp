@@ -35,7 +35,7 @@ if ($err) {
 		'access_token': $token,
 		'input': array(
 			'id': $mktoLead
-			);
+			),
 		'lookupField':'id',
 		'status':'Registered'
 	);
