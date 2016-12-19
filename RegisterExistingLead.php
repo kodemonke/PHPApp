@@ -33,7 +33,6 @@ if ($err) {
 	
 	
 	$fields = array(
-		'access_token' => $token,
 		'input'=> array(array(
 			'id' => $mktoLead
 			)),
