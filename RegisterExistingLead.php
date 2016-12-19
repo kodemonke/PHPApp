@@ -34,14 +34,15 @@ if ($err) {
 	
 	$fields = array(
 		'access_token' => $token,
-		'lookupField'=>'id',
-		'status'=>'Registered',
 		'input'=> array(
 			'id' => $mktoLead
 			)
+		'lookupField'=>'id',
+		'status'=>'Registered',
+		
 	);
 	
-	$field_string = http_build_query($fields);
+	$field_string = http_build_query(json_encode($fields));
 	
     $curl2 = curl_init();
 
