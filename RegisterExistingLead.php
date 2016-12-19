@@ -31,13 +31,14 @@ if ($err) {
   echo "cURL Error #1: " . $err;
     } else {
 	
+	
 	$fields = array(
-		'access_token': $token,
-		'input': array(
-			'id': $mktoLead
-			),
-		'lookupField':'id',
-		'status':'Registered'
+		'access_token' => $token,
+		'lookupField'=>'id',
+		'status'=>'Registered',
+		'input'=> array(
+			'id' => $mktoLead
+			)
 	);
 	
 	$field_string = http_build_query($fields);
