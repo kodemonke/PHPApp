@@ -36,10 +36,9 @@ if ($err) {
 		'access_token' => $token,
 		'input'=> array(
 			'id' => $mktoLead
-			)
+			),
 		'lookupField'=>'id',
-		'status'=>'Registered',
-		
+		'status'=>'Registered'
 	);
 	
 	$field_string = http_build_query(json_encode($fields));
