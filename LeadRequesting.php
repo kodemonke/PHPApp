@@ -59,7 +59,7 @@ if ($err) {
 			
 			$memberList = json_decode(file_get_contents('programMembers.json;'));
 			
-			foreach($values->result as $item){
+			foreach($memberList->result as $item){
 				if($item->id == $mktoLead){
 					$leadArray = array(
 						"result"=> array(array(
