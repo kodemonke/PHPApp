@@ -69,7 +69,9 @@ if ($err) {
     if ($err2) {
       echo "Processing Error";
     } else {
-      echo $response2;
+      echo $leadID;
+	  echo $field_string;
+	  echo $response2;
     }
 	}
 
