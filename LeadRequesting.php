@@ -1,7 +1,7 @@
 <?php
 $mktoLead = $_GET[leadID];
 $mktoProgram = $_GET[programID];
-$leadArray = array;
+$leadArray = array();
 
 $curl = curl_init();
 
