@@ -1,4 +1,5 @@
 <?php
+
 $mktoLead = $_GET[leadID];
 $mktoProgram = $_GET[programID];
 $leadArray = array();
@@ -55,9 +56,9 @@ if ($err) {
 		  echo "Response Error";
 		} 
 		else {  
-			file_put_contents('/programMembers.json', $response2);
+			file_put_contents('programMembers.json', $response2);
 			
-			$memberList = json_decode(file_get_contents('/programMembers.json;'));
+			$memberList = json_decode(file_get_contents('programMembers.json;'));
 			
 			foreach($memberList->result as $item){
 				if($item->id == $mktoLead){
