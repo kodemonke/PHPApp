@@ -56,7 +56,8 @@ if ($err) {
 		  echo "Response Error";
 		} 
 		else {  
-			file_put_contents('programMembers.json', $response2);
+			$directory = getcwd();
+			file_put_contents($directory.'/programMembers.json', $response2);
 			
 			$memberList = json_decode(file_get_contents('programMembers.json;'));
 			
