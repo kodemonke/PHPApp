@@ -57,6 +57,7 @@ if ($err) {
 	  CURLOPT_POSTFIELDS => $field_string,
 	  CURLOPT_HTTPHEADER => array(
 		"cache-control: no-cache"
+		"content-type: application/json"
 	  ),
 	));
 
