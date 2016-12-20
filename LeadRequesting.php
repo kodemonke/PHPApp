@@ -59,7 +59,7 @@ if ($err) {
 			$directory = getcwd();
 			file_put_contents($directory.'/programMembers.json', $response2);
 			echo $directory;
-			$memberList = json_decode(file_get_contents($directory.'programMembers.json;'));
+			$memberList = json_decode(file_get_contents($directory.'/programMembers.json;'));
 			
 			foreach($memberList->result as $item){
 				if($item->id == $mktoLead){
