@@ -1,0 +1,36 @@
+{
+  "requestId": "1750e#1591d46e600",
+  "result": [
+    {
+      "id": 10354285,
+      "lastName": "Eklund",
+      "title": "Test Lead",
+      "email": "scott.eklund@watchguard.com",
+      "company": "WatchGuard",
+      "firstName": "Scott",
+      "membership": {
+        "progressionStatus": "Registered",
+        "isExhausted": false,
+        "acquiredBy": false,
+        "reachedSuccess": false,
+        "membershipDate": "2016-12-20T01:16:02Z"
+      }
+    },
+    {
+      "id": 10416088,
+      "lastName": "Andrews",
+      "title": "Marketing Automation Specialist",
+      "email": "adam.andrews@watchguard.com",
+      "company": "WatchGuard",
+      "firstName": "Adam",
+      "membership": {
+        "progressionStatus": "Registered",
+        "isExhausted": false,
+        "acquiredBy": false,
+        "reachedSuccess": false,
+        "membershipDate": "2016-12-20T16:16:01Z"
+      }
+    }
+  ],
+  "success": true
+}
