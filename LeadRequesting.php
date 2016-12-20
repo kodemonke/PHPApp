@@ -55,9 +55,9 @@ if ($err) {
 		  echo "Response Error";
 		} 
 		else {  
-			file_put_contents('programMembers.json', $response2);
+			file_put_contents('https://wg-mkt-integration.herokuapp.com/programMembers.json', $response2);
 			
-			$memberList = json_decode(file_get_contents('programMembers.json;'));
+			$memberList = json_decode(file_get_contents('https://wg-mkt-integration.herokuapp.com/programMembers.json;'));
 			
 			foreach($memberList->result as $item){
 				if($item->id == $mktoLead){
