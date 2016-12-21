@@ -70,7 +70,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 					while (!empty($pageToken)){
 						$curl = curl_init();
 
-						curl_setopt_array($curl2, array(
+						curl_setopt_array($curl, array(
 						  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'.json?nextPageToken=&fields=id,lastName,firstName,email,company,title&nextPageToken='.$pageToken.'&access_token='.$token,
 						  CURLOPT_RETURNTRANSFER => true,
 						  CURLOPT_ENCODING => "",
@@ -86,10 +86,12 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						$err = curl_error($curl);
 						curl_close($curl);
 						
-						$pagedData = json_decode($response);
-						$memberData = array_merge($memberData,$pagedData->result);
-						$pageToken = $pagedData->nextPageToken;
-						
+						if ($err){echo "Pagination Error"}
+						else {
+							$pagedData = json_decode($response);
+							$memberData = array_merge($memberData,$pagedData->result);
+							$pageToken = $pagedData->nextPageToken;
+						}
 						
 					}
 					
