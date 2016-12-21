@@ -7,12 +7,13 @@ $directory = getcwd();
 //Quick check to make sure the numbers are at least valid
 if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram) && strlen($mktoProgram) < 5 ){
 	
-	if(file_exists($directory.'/'.$mktoProgram.'-Members.json')){
 		$memberList = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
-	}
-	else{
+		$timeStamp = end($memberList)->lastUpdate;
+		
 		//Running only if not run in the last 5 minutes, then saving the new run time
-		 if(time() >= end($memberList)->lastUpdate + (60 * 5)){
+		 if(time() >= $timeStamp + (60 * 5)){
+			 
+			echo 
 			 
 			//Process to get access token (may be unnecessary eventually)
 			$curl = curl_init();
@@ -129,23 +130,21 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 	
 	 else{
 		 	
-			foreach($memberList->result as $item){
-				if($item->id == $mktoLead){
-					$leadArray = array(
-						"result"=> array(array(
-						"id"=> $item->id,
-						"lastName"=> $item->lastName,
-						"firstName"=> $item->firstName,
-						"title"=> $item->title,
-						"company"=> $item->company,
-						"email"=> $item->email,
-						"membership"=> $item->membership,
-							))
-					);
-					$leadInfo = json_encode($leadArray);
+		foreach($memberList as $item){
+			if($item->id == $mktoLead){
+				$leadArray = array(
+					"id"=> $item->id,
+					"lastName"=> $item->lastName,
+					"firstName"=> $item->firstName,
+					"title"=> $item->title,
+					"company"=> $item->company,
+					"email"=> $item->email,
+					"membership"=> $item->membership,
+				);	
+				$leadInfo = json_encode($leadArray);
 				}
 			}
-			echo $leadInfo;
+		echo $leadInfo;	
 		}
 	}
 }
