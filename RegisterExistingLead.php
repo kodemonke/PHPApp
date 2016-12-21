@@ -23,12 +23,12 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 		else {
 			$fileContents = FILE_GET_CONTENTS($directory.'/programs/inProcess.json');
 			$registrations = json_decode($fileContents);
-				array_push($registrations,$payload);
-				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrations));
-			}
+			array_push($registrations,$payload);
+			FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrations));
 			echo "Success!";
-		}
+			}
 	}
+	
 }
 else{echo "Invalid Input";}
 
