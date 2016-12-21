@@ -38,93 +38,88 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 			  
 			curl_close($curl);
 			  
-			if ($err) {
-				echo "Authentication Error:".$err;
-				} 
-				else {
-					//Gets the first page of available data
-					$curl2 = curl_init();
+			if ($err) {echo "Authentication Error:".$err;} 
+			else {
+				//Gets the first page of available data
+				$curl2 = curl_init();
 
-					curl_setopt_array($curl2, array(
-					  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'.json?nextPageToken=&fields=id,lastName,firstName,email,company,title&access_token='.$token,
-					  CURLOPT_RETURNTRANSFER => true,
-					  CURLOPT_ENCODING => "",
-					  CURLOPT_MAXREDIRS => 10,
-					  CURLOPT_TIMEOUT => 30,
-					  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-					  CURLOPT_CUSTOMREQUEST => "GET",
-					  CURLOPT_HTTPHEADER => array(
-					  "cache-control: no-cache"
-					  ),
-					));
+				curl_setopt_array($curl2, array(
+				  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'.json?nextPageToken=&fields=id,lastName,firstName,email,company,title&access_token='.$token,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+				  "cache-control: no-cache"
+				  ),
+				));
 
-					$response2 = curl_exec($curl2);
-					$err2 = curl_error($curl2);
+				$response2 = curl_exec($curl2);
+				$err2 = curl_error($curl2);
 
-					curl_close($curl2);
+				curl_close($curl2);
 
-					if ($err2) {
-					  echo "Response Error";
-					} 
-					else {  
+				if ($err2) {echo "Response Error";} 
+				else {  
+					$rawData = json_decode($response2);
+					$memberData = $rawData->result;
+					$pageToken = $rawData->nextPageToken;
+					
+					while (!empty($pageToken)){
+						$curl = curl_init();
+
+						curl_setopt_array($curl2, array(
+						  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'.json?nextPageToken=&fields=id,lastName,firstName,email,company,title&nextPageToken='.$pageToken.'&access_token='.$token,
+						  CURLOPT_RETURNTRANSFER => true,
+						  CURLOPT_ENCODING => "",
+						  CURLOPT_MAXREDIRS => 10,
+						  CURLOPT_TIMEOUT => 30,
+						  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+						  CURLOPT_CUSTOMREQUEST => "GET",
+						  CURLOPT_HTTPHEADER => array(
+						  "cache-control: no-cache"
+						  ),
+						));
+						$response = curl_exec($curl);
+						$err = curl_error($curl);
+						curl_close($curl);
 						
-						$rawData = json_decode($response2);
-						$memberData = $rawData->result;
-						$repackData = json_encode($memberData);
-						$pageToken = $rawData->nextPageToken;
+						$pagedData = json_decode($response);
+						$memberData = array_merge($memberData,$pagedData->result)
+						$pageToken = $pagedData->nextPageToken;
 						
-						file_put_contents($directory.'/programs/'.$mktoProgram.'-Members.json', $repackData);
 						
-						while (!empty($pageToken)){
-							$curl = curl_init();
-
-							curl_setopt_array($curl2, array(
-							  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'.json?nextPageToken=&fields=id,lastName,firstName,email,company,title&nextPageToken='.$pageToken.'&access_token='.$token,
-							  CURLOPT_RETURNTRANSFER => true,
-							  CURLOPT_ENCODING => "",
-							  CURLOPT_MAXREDIRS => 10,
-							  CURLOPT_TIMEOUT => 30,
-							  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-							  CURLOPT_CUSTOMREQUEST => "GET",
-							  CURLOPT_HTTPHEADER => array(
-							  "cache-control: no-cache"
-							  ),
-							));
-							$response = curl_exec($curl);
-							$err = curl_error($curl);
-							curl_close($curl);
+					}
+					
+					$timeStamp = ',{"lastUpdate":"'.time().'"}';
+					array_push($memberData,$timeStamp);
+					
+					$repackData = json_encode($memberData);
+					file_put_contents($directory.'/programs/'.$mktoProgram.'-Members.json', $repackData);
+						
+					$memberList = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
 							
-							$pagedData = json_decode($response);
-							$pagedRepack= json_encode($pagedData->result);
-							$pageToken = $pagedData->nextPageToken;
-							
-							file_put_contents($directory.'/programs/'.$mktoProgram.'-Members.json', $pagedRepack, FILE_APPEND);
-						}
-							$timeStamp = ',"lastUpdate":"'.time().'"';
-							
-							file_put_contents($directory.'/programs/'.$mktoProgram.'-Members.json',$timeStamp,FILE_APPEND);
-							
-						$memberList = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
-								
-						foreach($memberList->result as $item){
-							if($item->id == $mktoLead){
-								$leadArray = array(
-									"result"=> array(array(
-									"id"=> $item->id,
-									"lastName"=> $item->lastName,
-									"firstName"=> $item->firstName,
-									"title"=> $item->title,
-									"company"=> $item->company,
-									"email"=> $item->email,
-									"membership"=> $item->membership,
-										))
-								);	
-								$leadInfo = json_encode($leadArray);
-							}
+					foreach($memberList->result as $item){
+						if($item->id == $mktoLead){
+							$leadArray = array(
+								"result"=> array(array(
+								"id"=> $item->id,
+								"lastName"=> $item->lastName,
+								"firstName"=> $item->firstName,
+								"title"=> $item->title,
+								"company"=> $item->company,
+								"email"=> $item->email,
+								"membership"=> $item->membership,
+									))
+							);	
+							$leadInfo = json_encode($leadArray);
 						}
 					}
-					echo $leadInfo;
 				}
+				echo $leadInfo;
+			}
 			}
 	
 	 else{
