@@ -5,8 +5,11 @@ $mktoProgram = $_GET[programID];
 $leadArray = array();
 $directory = getcwd();
 
+$last_run = file_get_contents($directory.'/lastRun.txt');
+
 if (ctype_digit($mktoLead) && strlen($mktoLead) < 10){
 	 if(time() >= $last_run + (60 * 5)){
+		file_put_contents($directory.'/lastRun.txt', time());
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
