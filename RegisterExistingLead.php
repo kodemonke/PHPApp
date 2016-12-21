@@ -23,11 +23,9 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 		else {
 			
 			$registrations = json_decode(FILE_GET_CONTENTS($directory.'/programs/inProcess.json'));
-			echo $registrations;
 			array_push($registrations,$payload);
-			echo $registrations;
 			
-			FILE_GET_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrants));
+			FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrations));
 			
 			echo "Success!";
 		}
