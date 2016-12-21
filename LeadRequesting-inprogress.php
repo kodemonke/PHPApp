@@ -86,7 +86,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						$err = curl_error($curl);
 						curl_close($curl);
 						
-						if ($err){echo "Pagination Error"}
+						if ($err) {echo "Pagination Error";}
 						else {
 							$pagedData = json_decode($response);
 							$memberData = array_merge($memberData,$pagedData->result);
