@@ -22,16 +22,18 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 		if (empty($payload)){echo "Not in Program.";}
 		else {
 			$fileContents = json_decode(FILE_GET_CONTENTS($directory.'/programs/inProcess.json'));
+			echo "File contents before:".$fileContents."<br />";
 			
-			if(!file_exists($directory.'/programs/inProcess.json')|| $fileContents = ""){
+			if(!file_exists($directory.'/programs/inProcess.json')|| $fileContents = "" || $fileContents = "null"){
 				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode(array($payload)));
+				
+				echo "File contents after, first data:".$fileContents."<br />";
 			}
 			else{
-				echo "File contents before:".$fileContents."<br />";
 				array_push($fileContents,$payload);
 				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrations));
 				
-				echo "File contents after:".$fileContents."<br />";
+				echo "File contents after, existing data:".$fileContents."<br />";
 			}
 		}
 	}
