@@ -15,7 +15,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 		//Process to get access token (may be unnecessary eventually)
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		  CURLOPT_URL => "https://483-kcw-712.mktorest.com/identity/oauth/token?grant_type=client_credentials&client_id=4774cebe-0187-4a08-b19d-8a6c52862bf3&client_secret=yZ0qmfqTV89c0wHqdN2JFIiQb0f2wdBb",
+		  CURLOPT_URL => "https://483-kcw-712.mktorest.com/identity/oauth/token?grant_type=client_credentials&client_id=".getenv('MARKETO_ID')."&client_secret=".getenv('MARKETO_SECRET'),
 		  CURLOPT_RETURNTRANSFER => true,
 		  CURLOPT_ENCODING => "",
 		  CURLOPT_MAXREDIRS => 10,
