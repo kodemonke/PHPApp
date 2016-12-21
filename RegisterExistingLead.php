@@ -3,6 +3,7 @@
 $mktoProgram = $_GET[programID];
 $mktoLead = $_GET[leadID];
 $directory = getcwd();
+$payload = array();
 
 if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 && ctype_digit($mktoProgram) && strlen($mktoProgram) == 4){
 	
@@ -22,9 +23,11 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 		else {
 			
 			$registrations = json_decode(FILE_GET_CONTENTS($directory.'/programs/inProcess.json'));
+			echo $registrations;
 			array_push($registrations,$payload);
+			echo $registrations;
 			
-			file_put_contents($directory.'/programs/inProcess.json',json_encode($registrants));
+			FILE_GET_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrants));
 			
 			echo "Success!";
 		}
