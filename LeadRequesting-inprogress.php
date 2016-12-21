@@ -12,7 +12,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 	}
 	else{
 		//Running only if not run in the last 5 minutes, then saving the new run time
-		 if(time() >= $memberList->lastUpdate + (60 * 5)){
+		 if(time() >= end($values)->lastUpdate + (60 * 5)){
 			 
 			//Process to get access token (may be unnecessary eventually)
 			$curl = curl_init();
