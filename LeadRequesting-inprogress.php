@@ -93,7 +93,9 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						
 					}
 					
-					$timeStamp = ',{"lastUpdate":"'.time().'"}';
+					$timeStamp = array(
+						"lastUpdate"=>time()
+						);
 					array_push($memberData,$timeStamp);
 					
 					$repackData = json_encode($memberData);
@@ -101,10 +103,9 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						
 					$memberList = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
 							
-					foreach($memberList->result as $item){
+					foreach($memberList as $item){
 						if($item->id == $mktoLead){
 							$leadArray = array(
-								"result"=> array(array(
 								"id"=> $item->id,
 								"lastName"=> $item->lastName,
 								"firstName"=> $item->firstName,
@@ -112,7 +113,6 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 								"company"=> $item->company,
 								"email"=> $item->email,
 								"membership"=> $item->membership,
-									))
 							);	
 							$leadInfo = json_encode($leadArray);
 						}
