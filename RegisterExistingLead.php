@@ -13,11 +13,14 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 		foreach($memberList as $item){
 			if($item->id == $mktoLead){
 				$payload = array(
-				"programID"=>$mktoProgram;
-				"id"=>$mktoLead;
+				"programID"=>$mktoProgram,
+				"id"=>$mktoLead
 				);
-			
+			print_r($payload);
+				
 			$repackData = array_push($memberList,$payload);
+			
+			print_r($repackData);
 			
 			file_put_contents($directory.'/programs/inProcess.json',json_encode($repackData));
 			
