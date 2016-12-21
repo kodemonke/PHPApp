@@ -36,7 +36,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 		  
 		curl_close($curl);
 		  
-		if ($err) {echo "Authentication Error:"} 
+		if ($err) {echo "Authentication Error:";} 
 		else {
 			//Gets the first page of available data
 			$curl2 = curl_init();
