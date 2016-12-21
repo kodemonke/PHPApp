@@ -91,15 +91,10 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						
 						if ($err) {echo "Pagination Error";}
 						else {
-							print_r ($memberData);
-							
 							$pagedData = json_decode($response);
-							$oldData = $memberData;
-							$memberData = array_push($oldData,$pagedData->result);
+							array_push($memberData,$pagedData->result);
 							$pageToken = $pagedData->nextPageToken;
 							
-							echo "<br/><br/>";
-							print_r ($oldData);
 							echo "<br/><br/>";
 							print_r ($memberData);
 						}
