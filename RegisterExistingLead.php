@@ -23,7 +23,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 			echo "Success!";
 			print_r($payload);
 			
-			file_put_contents($directory.'/programs/inProcess.json',json_encode($payLoad));
+			file_put_contents($directory.'/programs/inProcess.json',json_encode($payload));
 		}
 	}
 }
