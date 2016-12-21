@@ -67,6 +67,10 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 					$memberData = $rawData->result;
 					$pageToken = $rawData->nextPageToken;
 					
+					echo $pageToken;
+					echo "<br/><br/>";
+					
+					//Begins pagination if needed
 					while (!empty($pageToken)){
 						$curl = curl_init();
 
