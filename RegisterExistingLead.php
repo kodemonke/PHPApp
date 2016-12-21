@@ -16,20 +16,19 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 				"programID"=>$mktoProgram,
 				"id"=>$mktoLead
 				);
-			print_r($payload);
+				print_r($payload);
+					
+				$repackData = array_push($memberList,$payload);
 				
-			$repackData = array_push($memberList,$payload);
-			
-			print_r($repackData);
-			
-			file_put_contents($directory.'/programs/inProcess.json',json_encode($repackData));
-			
-			echo "Success!";
-			
-			}		
-		}
-		else{echo "Not in program";}
+				print_r($repackData);
 				
+				file_put_contents($directory.'/programs/inProcess.json',json_encode($repackData));
+				
+				echo "Success!";
+				
+				}	
+			else{echo "Not in program";}
+		}		
 	}
 }
 else{echo "Invalid Input";}
