@@ -25,12 +25,13 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 			
 			if(!file_exists($directory.'/programs/inProcess.json')|| $fileContents = ""){
 				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode(array($payload)));
-				echo "Payload";
 			}
 			else{
+				echo "File contents before:".$fileContents."<br />";
 				array_push($fileContents,$payload);
 				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrations));
-				echo $fileContents;
+				
+				echo "File contents after:".$fileContents."<br />";
 			}
 		}
 	}
