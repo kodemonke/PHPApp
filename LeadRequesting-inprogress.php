@@ -89,7 +89,8 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						if ($err) {echo "Pagination Error";}
 						else {
 							$pagedData = json_decode($response);
-							$memberData = array_merge($memberData,$pagedData->result);
+							$oldData = $memberData;
+							$memberData = array_merge($oldData,$pagedData->result);
 							$pageToken = $pagedData->nextPageToken;
 						}
 						
