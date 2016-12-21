@@ -31,7 +31,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 			}
 			else{
 				array_push($fileContents,$payload);
-				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($registrations));
+				FILE_PUT_CONTENTS($directory.'/programs/inProcess.json',json_encode($fileContents));
 				
 				echo "File contents after, existing data:".$fileContents."<br />";
 			}
