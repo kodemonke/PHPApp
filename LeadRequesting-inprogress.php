@@ -12,9 +12,6 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 	
 	//Running only if not run in the last 5 minutes, then saving the new run time
 	 if(time() >= $timeStamp + (60 * 5)){
-		 
-		echo 
-		 
 		//Process to get access token (may be unnecessary eventually)
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
