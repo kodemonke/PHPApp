@@ -87,26 +87,24 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10){
 			}
 	 }
 	 else{
-		 file_put_contents($directory.'/programMembers.json', $response2);
-					$memberList = json_decode(file_get_contents($directory.'/programMembers.json'));
-					
-					foreach($memberList->result as $item){
-						if($item->id == $mktoLead){
-							$leadArray = array(
-								"result"=> array(array(
-								"id"=> $item->id,
-								"lastName"=> $item->lastName,
-								"firstName"=> $item->firstName,
-								"title"=> $item->title,
-								"company"=> $item->company,
-								"email"=> $item->email,
-								"membership"=> $item->membership,
-									))
-							);
-							$leadInfo = json_encode($leadArray);
-						}
-					}
-					echo $leadInfo;
+		 $memberList = json_decode(file_get_contents($directory.'/programMembers.json'));	
+			foreach($memberList->result as $item){
+				if($item->id == $mktoLead){
+					$leadArray = array(
+						"result"=> array(array(
+						"id"=> $item->id,
+						"lastName"=> $item->lastName,
+						"firstName"=> $item->firstName,
+						"title"=> $item->title,
+						"company"=> $item->company,
+						"email"=> $item->email,
+						"membership"=> $item->membership,
+							))
+					);
+					$leadInfo = json_encode($leadArray);
+				}
+			}
+			echo $leadInfo;
 	 }
 }
 else{
