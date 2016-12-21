@@ -67,8 +67,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 					$memberData = $rawData->result;
 					$pageToken = $rawData->nextPageToken;
 					
-					echo $pageToken;
-					echo "<br/><br/>";
+
 					
 					//Begins pagination if needed
 					while (!empty($pageToken)){
@@ -92,10 +91,17 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						
 						if ($err) {echo "Pagination Error";}
 						else {
+							echo $memberData;
+							
 							$pagedData = json_decode($response);
 							$oldData = $memberData;
 							$memberData = array_merge($oldData,$pagedData->result);
 							$pageToken = $pagedData->nextPageToken;
+							
+							echo "<br/><br/>";
+							echo $oldData;
+							echo "<br/><br/>";
+							echo $memberData;
 						}
 						
 					}
