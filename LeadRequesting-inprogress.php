@@ -87,7 +87,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram
 						curl_close($curl);
 						
 						$pagedData = json_decode($response);
-						$memberData = array_merge($memberData,$pagedData->result)
+						$memberData = array_merge($memberData,$pagedData->result);
 						$pageToken = $pagedData->nextPageToken;
 						
 						
