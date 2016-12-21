@@ -1,4 +1,5 @@
 <?php
+//header('Access-Control-Allow-Origin: https://secure.watchguard.com');
 $mktoLead = $_GET[leadID];
 $mktoProgram = $_GET[programID];
 $leadArray = array();

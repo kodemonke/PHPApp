@@ -20,10 +20,13 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 		}
 		if (empty($payload)){echo "Not in Program.";}
 		else {
-			echo "Success!";
-			print_r($payload);
 			
-			file_put_contents($directory.'/programs/inProcess.json',json_encode($payload));
+			$registrations = json_decode(FILE_GET_CONTENTS($directory.'/programs/inProcess.json'));
+			array_push($registrations,$payload);
+			
+			file_put_contents($directory.'/programs/inProcess.json',json_encode($registrants));
+			
+			echo "Success!";
 		}
 	}
 }
