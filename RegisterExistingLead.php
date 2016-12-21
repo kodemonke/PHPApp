@@ -1,78 +1,34 @@
 <?php
-header('Access-Control-Allow-Origin: https://secure.watchguard.com');
+//header('Access-Control-Allow-Origin: https://secure.watchguard.com');
 $mktoProgram = $_GET[programID];
 $mktoLead = $_GET[leadID];
+$directory = getcwd();
 
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://483-kcw-712.mktorest.com/identity/oauth/token?grant_type=client_credentials&client_id=4774cebe-0187-4a08-b19d-8a6c52862bf3&client_secret=yZ0qmfqTV89c0wHqdN2JFIiQb0f2wdBb",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
-    "cache-control: no-cache"
-  ),
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-  $data = json_decode($response);
-  $token = $data->access_token;
-
-  
-curl_close($curl);
-  
-if ($err) {
-  echo "Authentication Error";
-    } else {
+if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 && ctype_digit($mktoProgram) && strlen($mktoProgram) == 4){
 	
-	
-	$fields = array(
-		'input'=> array(array(
-			'id' => $mktoLead
-			)),
-		'lookupField'=>'id',
-		'status'=>'Registered'
-	);
-	
-	
-	
-	$field_string = json_encode($fields);
-	
-    $curl2 = curl_init();
-
-	 curl_setopt_array($curl2, array(
-      CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$mktoProgram.'/status.json?access_token='.$token,
-	  CURLOPT_RETURNTRANSFER => true,
-	  CURLOPT_ENCODING => "",
-	  CURLOPT_MAXREDIRS => 10,
-	  CURLOPT_TIMEOUT => 30,
-	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	  CURLOPT_CUSTOMREQUEST => "POST",
-	  CURLOPT_POSTFIELDS => $field_string,
-	  CURLOPT_HTTPHEADER => array(
-		"cache-control: no-cache",
-		"content-type: application/json"
-	  ),
-	));
-
-    $response2 = curl_exec($curl2);
-    $err2 = curl_error($curl2);
-	
-    curl_close($curl2);
-
-    if ($err2) {
-      echo "Processing Error";
-    } else {
-      echo $leadID;
-	  echo $field_string;
-	  echo $response2;
-    }
+	if (!file_exists($directory.'/programs/'.$mktoProgram.'-Members.json')){echo "Program does not exist.";}
+	else{
+		$memberList = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
+						
+		foreach($memberList as $item){
+			if($item->id == $mktoLead){
+				$payload = array(
+				"programID"=>$mktoProgram;
+				"id"=>$mktoLead;
+				);
+			
+			$repackData = array_push($memberList,$payload);
+			
+			file_put_contents($directory.'/programs/inProcess.json',json_encode($repackData));
+			
+			echo "Success!";
+			
+			}		
+		}
+		else{echo "Not in program";}
+				
 	}
+}
+else{echo "Invalid Input";}
 
 ?>

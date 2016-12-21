@@ -5,7 +5,7 @@ $leadArray = array();
 $directory = getcwd();
 
 //Quick check to make sure the numbers are at least valid
-if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && ctype_digit($mktoProgram) && strlen($mktoProgram) < 5 ){
+if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 && ctype_digit($mktoProgram) && strlen($mktoProgram) == 4){
 	
 	$memberList = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
 	$timeStamp = end($memberList)->lastUpdate;
