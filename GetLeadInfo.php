@@ -66,8 +66,6 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 				$memberData = $rawData->result;
 				$pageToken = $rawData->nextPageToken;
 				
-
-				
 				//Begins pagination if needed
 				while (!empty($pageToken)){
 					$curl = curl_init();
@@ -125,7 +123,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 			if (empty($leadInfo)){echo "Not in program.";}
 			else{echo $leadInfo;}
 		}
-		}
+	}
 
  else{
 		
