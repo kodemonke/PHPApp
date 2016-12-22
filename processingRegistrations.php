@@ -6,7 +6,7 @@ $Leads = array_unique($rawLeads);
 
 echo "test 1<br />";
 
-if (empty($Leads)){Echo "Success: No Leads. You're all good!"}
+if (empty($Leads)){Echo "Success: No Leads. You're all good!";}
 else{
 	foreach($Leads as $item){
 		if (!in_array($item->programID,$programList)){
