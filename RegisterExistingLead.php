@@ -4,6 +4,7 @@ $mktoProgram = $_GET[programID];
 $mktoLead = $_GET[leadID];
 $directory = getcwd();
 $payload = array();
+$success = "";
 
 if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 && ctype_digit($mktoProgram) && strlen($mktoProgram) == 4){
 	
