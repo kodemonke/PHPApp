@@ -1,6 +1,6 @@
 <?php
 $directory = getcwd();
-$Leads = json_decode(file_get_contents($directory.'/programs/inMembers.json'));
+$Leads = json_decode(file_get_contents($directory.'/programs/inProcess.json'));
 
 if (empty($Leads)){Echo "Success: No Leads. You're all good!";}
 else{
