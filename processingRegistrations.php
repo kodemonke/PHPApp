@@ -70,11 +70,12 @@ else{
 
 			curl_close($curl2);
 			
-			echo $tempArray."<br />";
+			print_r($tempArray);
+			echo "<br />";
 			
 			if ($err2){echo "Processing Error".$err2;}
 			else{
-				if (strpos($response2,'"success":false,"')){echo $response2;}
+				if (strpos($response2,'"success":false,"')){echo "error:".$response2;}
 				else{
 				echo "Success!".$response2;}
 			}
