@@ -64,7 +64,8 @@ else{
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS => $payload,
 			  CURLOPT_HTTPHEADER => array(
-			  "cache-control: no-cache"
+			  "cache-control: no-cache",
+			  "content-type: application/json"
 			  ),
 			));
 
