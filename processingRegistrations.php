@@ -61,8 +61,8 @@ else{
 			  CURLOPT_CUSTOMREQUEST => "GET",
 			  CURLOPT_POSTFIELDS => array(
 			  "input:".$tempArray,
-			  "lookupField": "id",
-			  "status": "Registered"
+			  "lookupField: id",
+			  "status: Registered"
 			  ),
 			  CURLOPT_HTTPHEADER => array(
 			  "cache-control: no-cache"
