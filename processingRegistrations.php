@@ -19,8 +19,11 @@ else{
 				"id"=>$item->id);
 			}
 		}
-		echo $tempArray."<br />";
-		$payload = json_encode($tempArray);
+		
+		$payload = json_encode(array(
+			  "input"=>$tempArray,
+			  "lookupField"=>"id",
+			  "status"=> "Registered"));
 		echo $payload."<br />";
 		
 		//API call goes right here. Use $program as the program and $payload as id list
@@ -59,11 +62,7 @@ else{
 			  CURLOPT_TIMEOUT => 30,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
-			  CURLOPT_POSTFIELDS => array(
-			  "input:".$payload,
-			  "lookupField: id",
-			  "status: Registered"
-			  ),
+			  CURLOPT_POSTFIELDS => $payload,
 			  CURLOPT_HTTPHEADER => array(
 			  "cache-control: no-cache"
 			  ),
@@ -90,11 +89,6 @@ else{
 		}
 		
 	}
-	echo json_encode(array(
-			  "input:".$payload,
-			  "lookupField: id",
-			  "status: Registered"
-			  ))."<br />";
 	//clears out the file when finished. Probably need something more elegant eventually. 
 	if($error != "true"){file_put_contents($directory.'/programs/inProcess.json', "");}
 }
