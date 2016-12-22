@@ -30,10 +30,10 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 			$test = json_decode(FILE_GET_CONTENTS($directory.'/programs/inProcess.json'));
 			foreach($test as $item){
 				if($test->id == $mktoLead){
-					$success = true;
+					$success = 'true';
 				}
 			}
-			if($success == true){echo "Success. Probably.";}
+			if($success = 'true'){echo "Success. Probably.";}
 			else{echo "Error";}
 		}		
 	}
