@@ -48,7 +48,7 @@ else{
 			$curl2 = curl_init();
 
 			curl_setopt_array($curl2, array(
-			  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$program.'json?access_token='.$token,
+			  CURLOPT_URL => 'https://483-kcw-712.mktorest.com/rest/v1/leads/programs/'.$program.'/status.json?access_token='.$token,
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
 			  CURLOPT_MAXREDIRS => 10,
