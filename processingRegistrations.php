@@ -60,7 +60,7 @@ else{
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "GET",
 			  CURLOPT_POSTFIELDS => array(
-			  "input": $tempArray,
+			  "input:".$tempArray,
 			  "lookupField": "id",
 			  "status": "Registered"
 			  ),
@@ -74,7 +74,7 @@ else{
 
 			curl_close($curl2);
 			
-			if ($err2){ echo "Processing Error";}
+			if ($err2){ echo "Processing Error".$err2;}
 			else{echo "Success! Maybe.<br />".$response2;}
 		}
 		
