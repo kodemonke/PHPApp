@@ -70,8 +70,13 @@ else{
 
 			curl_close($curl2);
 			
+			echo .$tempArray."<br />";
+			
 			if ($err2){ echo "Processing Error".$err2;}
-			else{echo "Success! Maybe.<br />".$response2;}
+			else{
+				if (strpos($response2,'"success":false,"')){echo $response2;}
+				else{
+				echo "Success!".$response2;}
 		}
 		
 	}
