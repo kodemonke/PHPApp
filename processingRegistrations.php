@@ -1,10 +1,6 @@
 <?php
 $directory = getcwd();
-
-$rawLeads = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
-$Leads = array_unique($rawLeads);
-
-echo "test 1<br />";
+$Leads = json_decode(file_get_contents($directory.'/programs/'.$mktoProgram.'-Members.json'));
 
 if (empty($Leads)){Echo "Success: No Leads. You're all good!";}
 else{
