@@ -72,11 +72,12 @@ else{
 			
 			echo $tempArray."<br />";
 			
-			if ($err2){ echo "Processing Error".$err2;}
+			if ($err2){echo "Processing Error".$err2;}
 			else{
 				if (strpos($response2,'"success":false,"')){echo $response2;}
 				else{
 				echo "Success!".$response2;}
+			}
 		}
 		
 	}
