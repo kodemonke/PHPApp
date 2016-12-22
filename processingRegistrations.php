@@ -19,8 +19,9 @@ else{
 				"id"=>$item->id);
 			}
 		}
+		$payload = json_encode($tempArray);
 		
-		//API call goes right here. Use $program as the program and $tempArray as id list
+		//API call goes right here. Use $program as the program and $payload as id list
 		
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
@@ -57,7 +58,7 @@ else{
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS => array(
-			  "input:".json_encode($tempArray),
+			  "input:".$payload,
 			  "lookupField: id",
 			  "status: Registered"
 			  ),
