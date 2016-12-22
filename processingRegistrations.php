@@ -72,11 +72,13 @@ else{
 			
 			if ($err2){echo "Processing Error".$err2;}
 			else{
-				if (strpos($response2,'"success":false,"')){echo "Error";}
+				if (strpos($response2,'"success":true,"')){
+					echo $program." Success!<br />";
+					print_r($response2);
+					}
 				
 				else{
-				echo $program." Success!<br />";
-				print_r($response2);
+					echo "Error";
 				}
 			}
 		}
@@ -84,7 +86,7 @@ else{
 	}
 	
 	//clears out the file when finished. Probably need something more elegant eventually. 
-	file_put_contents($directory.'/programs/inProcess.json', "")
+	file_put_contents($directory.'/programs/inProcess.json', "");
 }
 
 ?>
