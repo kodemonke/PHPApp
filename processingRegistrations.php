@@ -20,6 +20,7 @@ else{
 			}
 		}
 		$payload = json_encode($tempArray);
+		echo $payload."<br />";
 		
 		//API call goes right here. Use $program as the program and $payload as id list
 		
@@ -88,7 +89,11 @@ else{
 		}
 		
 	}
-	
+	echo json_encode(array(
+			  "input:".$payload,
+			  "lookupField: id",
+			  "status: Registered"
+			  ))."<br />";
 	//clears out the file when finished. Probably need something more elegant eventually. 
 	if($error != "true"){file_put_contents($directory.'/programs/inProcess.json', "");}
 }
