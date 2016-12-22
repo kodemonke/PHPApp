@@ -24,7 +24,6 @@ else{
 			  "input"=>$tempArray,
 			  "lookupField"=>"id",
 			  "status"=> "Registered"));
-		echo $payload."<br />";
 		
 		//API call goes right here. Use $program as the program and $payload as id list
 		
@@ -76,7 +75,7 @@ else{
 			
 			if ($err2){echo "Processing Error".$err2;}
 			else{
-				if (strpos($response2,'"success":true,"')){
+				if (strpos($response2,'"success":true')){
 					echo $program." Success!<br />";
 					print_r($response2);
 					}
