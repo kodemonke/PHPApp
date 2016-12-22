@@ -19,8 +19,8 @@ else{
 				"id"=>$item->id);
 			}
 		}
-		$payload = json_encode($tempArray);
-		echo $payload."<br />";
+		$payload = $tempArray;
+		echo json_encode($payload)."<br />";
 		
 		//API call goes right here. Use $program as the program and $payload as id list
 		
