@@ -70,18 +70,21 @@ else{
 
 			curl_close($curl2);
 			
-			print_r(json_encode($tempArray));
-			echo "<br />";
-			
 			if ($err2){echo "Processing Error".$err2;}
 			else{
-				if (strpos($response2,'"success":false,"')){echo "error:".$response2;}
+				if (strpos($response2,'"success":false,"')){echo "Error";}
+				
 				else{
-				echo "Success!".$response2;}
+				echo $program." Success!<br />";
+				print_r($response2);
+				}
 			}
 		}
 		
 	}
+	
+	//clears out the file when finished. Probably need something more elegant eventually. 
+	file_put_contents($directory.'/programs/inProcess.json', "")
 }
 
 ?>
