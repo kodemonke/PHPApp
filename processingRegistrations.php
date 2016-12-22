@@ -56,7 +56,7 @@ else{
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "GET",
 			  CURLOPT_POSTFIELDS => array(
-			  "input:".$tempArray,
+			  "input:".json_encode($tempArray),
 			  "lookupField: id",
 			  "status: Registered"
 			  ),
@@ -70,7 +70,7 @@ else{
 
 			curl_close($curl2);
 			
-			print_r($tempArray);
+			print_r(json_encode($tempArray));
 			echo "<br />";
 			
 			if ($err2){echo "Processing Error".$err2;}
