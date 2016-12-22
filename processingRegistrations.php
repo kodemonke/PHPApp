@@ -1,6 +1,7 @@
 <?php
 $directory = getcwd();
 $Leads = json_decode(file_get_contents($directory.'/programs/inProcess.json'));
+$error = "false";
 
 if (empty($Leads)){Echo "Success: No Leads. You're all good!";}
 else{
@@ -54,7 +55,7 @@ else{
 			  CURLOPT_MAXREDIRS => 10,
 			  CURLOPT_TIMEOUT => 30,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			  CURLOPT_CUSTOMREQUEST => "PUSH",
+			  CURLOPT_CUSTOMREQUEST => "POST",
 			  CURLOPT_POSTFIELDS => array(
 			  "input:".json_encode($tempArray),
 			  "lookupField: id",
@@ -79,6 +80,8 @@ else{
 				
 				else{
 					echo "Error";
+					print_r($response2);
+					$error = "true";
 				}
 			}
 		}
@@ -86,7 +89,7 @@ else{
 	}
 	
 	//clears out the file when finished. Probably need something more elegant eventually. 
-	file_put_contents($directory.'/programs/inProcess.json', "");
+	if($error != "true"){file_put_contents($directory.'/programs/inProcess.json', "");}
 }
 
 ?>
