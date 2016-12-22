@@ -70,7 +70,7 @@ else{
 
 			curl_close($curl2);
 			
-			echo .$tempArray."<br />";
+			echo $tempArray."<br />";
 			
 			if ($err2){ echo "Processing Error".$err2;}
 			else{
