@@ -34,10 +34,7 @@ if (ctype_digit($mktoLead) && strlen($mktoLead) < 10 && strlen($mktoLead) > 7 &&
 			}
 			if($success != true){echo "Error";}
 			else{echo "Success!";}
-		}
-			
-			
-		}
+		}		
 	}
 }
 	
