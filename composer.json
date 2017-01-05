@@ -1,24 +1,19 @@
 {
-    "require": {
-        "silex/silex": "~1.0@dev",
-		"predis/predis": "1.0.3",
-        "chh/cache-service-provider": "~1.0",
-        "ext-curl": "*"
-    },
-    "extra": {
-        "heroku": {
-            "document-root": "web",
-            "index-document": "index.php",
-            "php-config": [
-                "short_open_tag=on"
-            ],
-            "engines": {
-                "php": "5.5.*",
-                "nginx": "1.4.*"
-            },
-            "compile": [
-                "echo $FOO"
-            ]
-        }
-    }
+	"description": "The CodeIgniter framework",
+	"name": "codeigniter/framework",
+	"type": "project",
+	"homepage": "https://codeigniter.com",
+	"license": "MIT",
+	"support": {
+		"forum": "http://forum.codeigniter.com/",
+		"wiki": "https://github.com/bcit-ci/CodeIgniter/wiki",
+		"irc": "irc://irc.freenode.net/codeigniter",
+		"source": "https://github.com/bcit-ci/CodeIgniter"
+	},
+	"require": {
+		"php": ">=5.2.4"
+	},
+	"require-dev": {
+		"mikey179/vfsStream": "1.1.*"
 	}
+}
